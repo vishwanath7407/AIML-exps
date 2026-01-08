@@ -1,0 +1,16 @@
+# Semantic Network Representation
+
+semantic_network = {
+    'Bird': ['Can Fly'],
+    'Penguin': ['Bird', 'Cannot Fly'],
+    'Sparrow': ['Bird']
+}
+
+def show_relationship(entity):
+    if entity in semantic_network:
+        print(f"{entity} properties:", semantic_network[entity])
+    else:
+        print("Entity not found")
+
+show_relationship('Penguin')
+show_relationship('Sparrow')
