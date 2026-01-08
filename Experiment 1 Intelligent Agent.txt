@@ -1,0 +1,32 @@
+# Intelligent Agent: Simple Vacuum Cleaner Environment
+
+class Environment:
+    def __init__(self):
+        self.room_status = {
+            "A": "Dirty",
+            "B": "Dirty"
+        }
+
+class VacuumAgent:
+    def __init__(self, location):
+        self.location = location
+
+    def sense(self, environment):
+        return environment.room_status[self.location]
+
+    def act(self, environment):
+        if self.sense(environment) == "Dirty":
+            print(f"Cleaning room {self.location}")
+            environment.room_status[self.location] = "Clean"
+        else:
+            self.location = "B" if self.location == "A" else "A"
+            print(f"Moving to room {self.location}")
+
+# Main Program
+env = Environment()
+agent = VacuumAgent("A")
+
+for step in range(4):
+    print(f"\nStep {step + 1}")
+    agent.act(env)
+    print("Environment:", env.room_status)
