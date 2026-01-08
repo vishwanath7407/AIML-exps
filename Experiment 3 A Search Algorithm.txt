@@ -1,0 +1,40 @@
+import heapq
+
+graph = {
+    'A': [('B', 1), ('C', 3)],
+    'B': [('D', 3)],
+    'C': [('D', 1)],
+    'D': []
+}
+
+heuristic = {
+    'A': 4,
+    'B': 2,
+    'C': 1,
+    'D': 0
+}
+
+def a_star(start, goal):
+    open_list = []
+    heapq.heappush(open_list, (heuristic[start], 0, start))
+    visited = set()
+
+    while open_list:
+        f, g, node = heapq.heappop(open_list)
+
+        if node == goal:
+            return g
+
+        if node not in visited:
+            visited.add(node)
+            for neighbour, cost in graph[node]:
+                heapq.heappush(
+                    open_list,
+                    (g + cost + heuristic[neighbour], g + cost, neighbour)
+                )
+
+    return -1
+
+# Main program
+if __name__ == "__main__":
+    print("A* Search Path Cost:", a_star('A', 'D'))
