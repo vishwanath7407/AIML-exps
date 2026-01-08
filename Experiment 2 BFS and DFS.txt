@@ -1,0 +1,37 @@
+# BFS and DFS Implementation
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['F'],
+    'D': [],
+    'E': [],
+    'F': []
+}
+
+def bfs(start):
+    visited = set()
+    queue = [start]
+
+    print("BFS Traversal:")
+    while queue:
+        node = queue.pop(0)
+        if node not in visited:
+            print(node, end=" ")
+            visited.add(node)
+            queue.extend(graph[node])
+
+def dfs(start, visited=None):
+    if visited is None:
+        visited = set()
+        print("\nDFS Traversal:")
+
+    print(start, end=" ")
+    visited.add(start)
+
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(neighbor, visited)
+
+bfs('A')
+dfs('A')
