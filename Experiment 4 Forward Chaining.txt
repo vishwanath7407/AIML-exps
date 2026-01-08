@@ -1,0 +1,29 @@
+# Knowledge Base
+facts = {'A'}
+rules = [
+    ('A', 'B'),
+    ('B', 'C')
+]
+
+def forward_chaining():
+    inferred = set(facts)
+    changed = True
+
+    while changed:
+        changed = False
+        for premise, conclusion in rules:
+            if premise in inferred and conclusion not in inferred:
+                inferred.add(conclusion)
+                changed = True
+    print("Forward Chaining Result:", inferred)
+
+def backward_chaining(goal):
+    if goal in facts:
+        return True
+    for premise, conclusion in rules:
+        if conclusion == goal:
+            return backward_chaining(premise)
+    return False
+
+forward_chaining()
+print("Backward Chaining for C:", backward_chaining('C'))
